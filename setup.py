@@ -9,11 +9,11 @@ def read(fname):
 
 setup(
     name='Flask-Bootstrap',
-    version='2.3.2.2.dev1',
-    url='http://github.com/mbr/flask-bootstrap',
+    version='3.0.0.rc1',
+    url='https://github.com/50onRed/flask-bootstrap',
     license='BSD',
-    author='Marc Brinkmann',
-    author_email='git@marcbrinkmann.de',
+    author='Bernie Zang. Originally created by Marc Brinkmann',
+    author_email='bzang@50onred.com',
     description='An extension that includes Twitter\'s Bootstrap in your '
                 'project, without any boilerplate code.',
     long_description=read('README.rst'),

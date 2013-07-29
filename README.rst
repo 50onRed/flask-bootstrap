@@ -3,7 +3,7 @@ Flask-Bootstrap
 ===============
 
 Flask-Bootstrap packages `Twitter's Bootstrap
-<http://twitter.github.com/bootstrap/>`_ into an extension that mostly consists
+<http://twitter.github.io/bootstrap/>`_ into an extension that mostly consists
 of a blueprint named 'bootstrap'. It can also create links to serve Bootstrap
 from a CDN.
 
@@ -93,87 +93,17 @@ Installation
 Either install from github using ``pip`` or from `PyPI
 <http://pypi.python.org/pypi/Flask-Bootstrap>`_.
 
-A note on versioning
---------------------
+What's Included
+---------------
 
-Flask-Bootstrap tries to keep some track of Twitter's Bootstrap releases.
-Versioning is usually in the form of ``Bootstrap version`` - ``Flask-Bootstrap
-iteration``. For example, a version of ``2.0.3-2`` bundles Bootstrap version
-``2.0.3`` and is the second release of Flask-Bootstrap containing that version.
+The JS files included are distribution files provided by Bootstrap 3.
 
-If you need to rely on your templates not changing, simply pin the version in
-your setup.py.
-
-FAQ
----
-
-1. Why do I have undesired auto-escapes in my template output?
-
-   Make sure your templates end in ``.htm``, ``.html``, ``.xml`` or ``.xhtml``.
-   Flask sets the Jinja2-autoescape mode depending on the template file
-   extension (see `this StackOverflow question
-   <http://stackoverflow.com/questions/13222925/how-do-i-enable-autoescaping-in-templates-with-a-jhtml-extension-in-flask>`_
-   for more information).
-
-   General convention in Flask applications is to name your HTML-templates
-   ``.html`` though.
-
-2. How can I add custom javascript to the template?
-
-   Use Jinja2's ``super()`` in conjunction with the ``bootstrap_js_bottom``
-   block. The super-function adds the contents of a block from the parent
-   template, that way you can even decide if you want to include it before or
-   after jQuery/bootstrap. Example::
-
-     {% block bootstrap_js_bottom %}
-       {{super()}}
-       <script src="my_app_code.js">
-     {% endblock %}
+The CSS files are compiled from the files in the less folder. In order to make
+customizations and compile your own, please install Less.
 
 CHANGES
 ~~~~~~~
 
-The following changes could have possibly been not backwards compatible:
-
-2.1.0-1
+3.0.0
 """""""
-* New upstream release: 2.1.0.
-* Changed the default version of jQuery from 1.7.2 to just 1. This means that
-  the latest 1.x.x version of jQuery will be pulled.
-
-2.1.1-1
-"""""""
-* WTForms generated HTML code is now considered safe. This allows Flask-WTF's
-  ``RecaptchaField`` to work with ``quick_form``.
-
-2.1.1-2
-"""""""
-* There is no longer a self.app on Flask-Bootstrap. The extension can be shared
-  by any number of applications using ``init_app()`` (though the old
-  ``__init__()`` signature is kept for backward compatibiliy).
-
-2.2.1-1
-"""""""
-* `FontAwesome`_ is now supported
-  as well, can also be loaded from bootstrapCDN. Set ``BOOTSTRAP_FONTAWESOME``
-  to ``True`` to enable it.
-* ``BOOTSTRAP_CDN_BASEURL`` is now a dictionary for multiple CDNs (i.e.
-  Bootstrap, FontAwesome can use different base URLs). This will break any code
-  that relied on setting ``BOOTSTRAP_CDN_BASEURL``.
-
-2.2.2-1
-"""""""
-* `FontAwesome`_ now version 3.0 instead of 2.0.
-* The ``navbar()``-macro is gone. It was accidentally committed and never did
-  anything useful, so this hopefully won't concern anyone.
-
-2.3.0-2
-"""""""
-* Switched the CDN to `cdnjs <http://cdnjs.com>`_ because `netdna
-  <http://bootstrapcdn.com>`_ keeps changing files around too much.
-* Introduced ``BOOTSTRAP_CUSTOM_CSS`` option.
-
-2.3.2.1
-"""""""
-* Slight change in versioning (dot instead of hyphen for the Flask-Bootstrap
-  release).
+* Migrated to BS3
