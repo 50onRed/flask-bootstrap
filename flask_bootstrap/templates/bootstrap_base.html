@@ -23,12 +23,6 @@
     {%- if not config['BOOTSTRAP_CUSTOM_CSS'] %}
     <link href="{{'css/bootstrap.css'|bootstrap_find_resource}}" rel="stylesheet">
     {%- endif %}
-    {%- if config['BOOTSTRAP_FONTAWESOME'] %}
-    <link href="{{'css/font-awesome.css'|bootstrap_find_resource(cdn='fontawesome')}}" rel="stylesheet">
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="{{'css/font-awesome-ie7.css'|bootstrap_find_resource(use_minified=True, cdn='fontawesome')}}">
-    <![endif]-->
-    {%- endif %}
     {%- endblock bootstrap_style %}
     {%- block style %}
     {%- endblock %}
@@ -48,13 +42,8 @@
   {%- endblock head %}
   </head>
 
-  {%- block body_tag %}<body {%- if config['BOOTSTRAP_NAMESPACE'] %}class="{{ config['BOOTSTRAP_NAMESPACE'] }}" {%- endif %}>{%- endblock body_tag %}
+  {%- block body_tag %}<body>{%- endblock body_tag %}
   {%- block body %}
-    {%- if config['BOOTSTRAP_CHROMEFRAME'] %}
-    <!--[if lt IE 7]>
-      <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-    <![endif]-->
-    {%- endif %}
     {%- block body_content %}
     {%- endblock body_content %}
     {%- block bootstrap_js_bottom %}

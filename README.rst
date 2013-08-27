@@ -29,6 +29,9 @@ resources, but usually, this isn't needed. A bit better is using the
 ``bootstrap_find_resource`` template filter, which will CDN settings into
 account.
 
+If you are using custom code and still want to use files hosted from a CDN in production
+make sure you override the default CDN paths.
+
 Macros
 ------
 
@@ -78,14 +81,10 @@ Option                                 Default
 ``BOOTSTRAP_JQUERY_VERSION``           ``'1'``                                                  This version of jQuery is included in the template via Google CDN. Also honors ``BOOTSTRAP_USE_MINIFIED``. Set this to ``None`` to not include jQuery at all. Note that non-minified Bootstrap resources are sometimes missing on bootstrapcdn, so it is best not to use it without turning on ``BOOTSTRAP_USE_MINIFIED``.
 ``BOOTSTRAP_HTML5_SHIM``               ``True``                                                 Include the default IE-fixes that are usually included when using bootstrap.
 ``BOOTSTRAP_GOOGLE_ANALYTICS_ACCOUNT`` ``None``                                                 If set, include `Google Analytics <http://www.google.com/analytics>`_ boilerplate using this account.
-``BOOTSTRAP_USE_CDN``                  ``False``                                                If ``True``, Bootstrap resources will no be served from the local app instance, but will use a Content Delivery Network instead (configured by ``BOOTSTRAP_CDN_BASEURL``).
 ``BOOTSTRAP_CDN_BASEURL``              A dictionary set up with URLs to ``cdnjs.com``.          The URLs to which Bootstrap and other filenames are appended when using a CDN.
 ``BOOTSTRAP_CDN_PREFER_SSL``           ``True``                                                 If the ``BOOTSTRAP_CDN_BASEURL`` starts with ``//``, prepend ``'https:'`` to it.
-``BOOTSTRAP_FONTAWESOME``              ``False``                                                If ``True``, `FontAwesome`_ will be enabled.
-``BOOTSTRAP_CUSTOM_CSS``               ``False``                                                If ``True``, no Bootstrap CSS files will be loaded. Use this if you compile a custom css file that already includes bootstrap.
-====================================== ======================================================== ===
 
-.. _FontAwesome: http://fortawesome.github.com/Font-Awesome/
+====================================== ======================================================== ===
 
 Installation
 ------------
@@ -98,6 +97,8 @@ What's Included
 
 The JS files included are distribution files provided by Bootstrap 3.
 
+The LESS files needed to create the CSS files. Customizations should be made in the less/flask-bootstrap/ files and inlcuded in flask.less.
+
 The CSS files are compiled from the files in the less folder. In order to make
 customizations and compile your own, please install Less.
 
@@ -107,3 +108,6 @@ CHANGES
 3.0.0
 """""""
 * Migrated to BS3
+* Included Font Awesome as a part of the compiled CSS
+* Created flask-bootstrap less files to allow for custom CSS
+

@@ -9,7 +9,7 @@ def read(fname):
 
 setup(
     name='Flask-Bootstrap',
-    version='3.0.0.rc1',
+    version='3.0.0',
     url='https://github.com/50onRed/flask-bootstrap',
     license='BSD',
     author='Bernie Zang. Originally created by Marc Brinkmann',
