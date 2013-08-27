@@ -3,6 +3,7 @@
 *.swp
 *.orig
 .vagrant
+*.egg*
 /node_modules
 /components
 env/
