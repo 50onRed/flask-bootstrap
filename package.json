@@ -1,0 +1,11 @@
+{
+  "name": "flask-bootstrap",
+  "version": "3.0.0",
+  "devDependencies": {
+      "grunt": "latest",
+      "grunt-contrib-watch": "latest",
+      "grunt-contrib-copy": "latest",
+      "grunt-contrib-clean": "latest",
+      "grunt-recess": "latest"
+  }
+}

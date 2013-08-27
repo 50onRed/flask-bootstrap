@@ -1,2 +1,8 @@
 .DS_Store
 *.pyc
+*.swp
+*.orig
+.vagrant
+/node_modules
+/components
+env/

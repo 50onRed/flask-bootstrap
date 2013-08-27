@@ -1,17 +1,25 @@
 <!DOCTYPE html>
-<html{% block html_attribs %} lang="en"{% endblock html_attribs %}>
+{%- if config['BOOTSTRAP_MODERNIZER'] %}
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+{%- else %}
+  <html>
+{%- endif %}
 {%- block html %}
   <head>
   {%- block head %}
     <meta charset="utf-8">
-    <title>{% block title %}{{title}}{% endblock title %}</title>
     {%- block meta %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
     {%- endblock meta %}
 
-    {%- block style %}
+    <title>{% block title %}{{title}}{% endblock title %}</title>
+
+    {%- block bootstrap_style %}
     {%- if not config['BOOTSTRAP_CUSTOM_CSS'] %}
     <link href="{{'css/bootstrap.css'|bootstrap_find_resource}}" rel="stylesheet">
     {%- endif %}
@@ -21,18 +29,12 @@
     <link rel="stylesheet" href="{{'css/font-awesome-ie7.css'|bootstrap_find_resource(use_minified=True, cdn='fontawesome')}}">
     <![endif]-->
     {%- endif %}
-    {%- block style_navbar_padding %}
-    <style>
-      body {
-        padding-top: 60px;
-      }
-    </style>
-    {%- endblock style_navbar_padding %}
-    {%- endblock style %}
+    {%- endblock bootstrap_style %}
+    {%- block style %}
+    {%- endblock %}
 
     {%- if config['BOOTSTRAP_HTML5_SHIM'] %}
     {%- block bootstrap_html5_shim %}
-
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -40,36 +42,30 @@
     {%- endblock bootstrap_html5_shim %}
     {%- endif %}
 
-    {%- block favicons %}
-    {%- endblock favicons %}
+    {%- block js_top %}{%- endblock %}
+    {%- block favicons %}{%- endblock favicons %}
 
   {%- endblock head %}
   </head>
 
-  <body>
+  {%- block body_tag %}<body {%- if config['BOOTSTRAP_NAMESPACE'] %}class="{{ config['BOOTSTRAP_NAMESPACE'] }}" {%- endif %}>{%- endblock body_tag %}
   {%- block body %}
+    {%- if config['BOOTSTRAP_CHROMEFRAME'] %}
+    <!--[if lt IE 7]>
+      <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    {%- endif %}
     {%- block body_content %}
     {%- endblock body_content %}
     {%- block bootstrap_js_bottom %}
     {%- if config['BOOTSTRAP_JQUERY_VERSION'] %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/{{config['BOOTSTRAP_JQUERY_VERSION']}}/jquery.{% if config['BOOTSTRAP_USE_MINIFIED'] %}min.{% endif %}js"></script>
+    {% set jquery_local = 'js/jquery.min.js' if config['BOOTSTRAP_USE_MINIFIED'] else 'js/jquery.js' %}
+    <script>window.jQuery || document.write('<script src="{{ jquery_local|bootstrap_find_resource }}"><\/script>')</script>
     {%- endif %}
     <script src="{{'js/bootstrap.js'|bootstrap_find_resource}}"></script>
     {%- endblock bootstrap_js_bottom %}
-
-    {%- if config['BOOTSTRAP_GOOGLE_ANALYTICS_ACCOUNT'] %}
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '{{config['BOOTSTRAP_GOOGLE_ANALYTICS_ACCOUNT']}}']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-    {%- endif %}
+    {%- block js_bottom %}{% endblock %}
   {%- endblock body %}
   </body>
   {%- if config['BOOTSTRAP_FONTAWESOME'] %}
